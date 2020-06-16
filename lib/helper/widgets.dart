@@ -19,7 +19,7 @@ Widget buildDrawer(BuildContext context) {
             accountName: new Text(
               'Curso Aprovação',
               style: TextStyle(
-                color: Colors.white54,
+                color: Colors.white70,
                 //decoration: TextDecoration.underline,
                 // decorationColor: Colors.red,
                 // decorationStyle: TextDecorationStyle.wavy,
