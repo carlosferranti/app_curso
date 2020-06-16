@@ -46,13 +46,13 @@ Widget buildDrawer(BuildContext context) {
             ),
             currentAccountPicture: new CircleAvatar(
               radius: 20,
-              child: new Container(
-                padding: const EdgeInsets.all(0.0),
-                child: new Text('Email'),
-              ),
+              // child: new Container(
+              //   padding: const EdgeInsets.all(0.0),
+              //   child: new Text('Email'),
+              // ),
 
               // backgroundImage: new NetworkImage('https://i.pravatar.cc/300'),
-              // backgroundImage: AssetImage('assets/images/aprovacao3.png'),
+              backgroundImage: AssetImage('assets/images/aprovacao3.png'),
               backgroundColor: Colors.transparent,
             ),
           ),
