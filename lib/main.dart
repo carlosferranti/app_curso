@@ -6,22 +6,20 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // 
+  //
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-        title: 'Curso Aprovação',
+      title: 'Curso Aprovação',
       theme: ThemeData(
-       
         // primarySwatch: Colors.blue,
-          primaryColor: Colors.white,
-       
+        primaryColor: Colors.white,
+
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
-      home: Home(),  
+      home: Home(),
     );
   }
-} 
-
+}
