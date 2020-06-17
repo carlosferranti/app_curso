@@ -70,11 +70,11 @@ Widget buildDrawer(BuildContext context) {
                 // Navigator.pop(context);
                 // Navigator.of(context).pushNamed('/home-page');
                 // --
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => new Home(),
-                //     ));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => new Home(),
+                    ));
                 //
                 //  Navigator.pushNamed(context, '/second');
                 // Navigator.of(context).pushNamed('/settings');
@@ -238,13 +238,6 @@ Widget builAppBar(BuildContext context) {
         // --
         PopupMenuButton(
             onSelected: (x) {
-              // if (x == 0) {
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(builder: (context) => Home()),
-              //   );
-              // }
-
               switch (x) {
                 case 0:
                   Navigator.push(

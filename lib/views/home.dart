@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(      
+    return Scaffold(
       drawer: buildDrawer(context),
       appBar: builAppBar(context),
       body: _loading
@@ -87,41 +87,6 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-// _exit(BuildContext context) {
-//   // set up the buttons
-//   Widget cancelButton =
-//       FlatButton(child: Text("Não"),
-//       // onPressed: () => Navigator.pop(context));
-//       onPressed: (){
-
-//        Navigator.of(context).pop();
-//       });
-//   Widget continueButton = FlatButton(
-//     child: Text("Sim"),
-//     onPressed: () {
-//       SystemNavigator.pop();
-//     },
-//   );
-
-//   // set up the AlertDialog
-//   AlertDialog alert = AlertDialog(
-//     title: Text("Confirmação"),
-//     content: Text("Confirma saída?"),
-//     actions: [
-//       cancelButton,
-//       continueButton,
-//     ],
-//   );
-
-//   // show the dialog
-//   showDialog(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return alert;
-//     },
-//   );
-// }
 
 class CategoryTile extends StatelessWidget {
   final String imageUrl, categoryName;

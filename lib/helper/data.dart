@@ -5,20 +5,11 @@ List<CategoryModel> getCategories() {
   CategoryModel categoryModel = new CategoryModel();
 
   // 1
-  // categoryModel = new CategoryModel();
-  // // categoryModel.categoryName = "Policial";
-  // categoryModel.categoryName = "Business";
-  // categoryModel.imageUrl =
-  //     "https://jcconcursos.uol.com.br/media/_versions/noticia/carreiras-policiais2_widelg.jpg";
-  // category.add(categoryModel);
-  //
-    categoryModel = new CategoryModel();
-   categoryModel.categoryName = "Policial";  
+  categoryModel = new CategoryModel();
+  categoryModel.categoryName = "Policial";
   categoryModel.imageUrl =
       "https://jcconcursos.uol.com.br/media/_versions/noticia/carreiras-policiais2_widelg.jpg";
   category.add(categoryModel);
- 
-
 
   // 2
   categoryModel = new CategoryModel();
