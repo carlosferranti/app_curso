@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
                           );
                         }),
                   ),
-                  // Blogs
+                  // Articles
                   Container(
                     padding: EdgeInsets.only(top: 16),
                     child: ListView.builder(

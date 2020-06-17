@@ -257,7 +257,8 @@ Widget builAppBar(BuildContext context) {
                       value: element['value'],
                     ))
                 .toList())
-      ]);
+      ]
+      );
 }
 
 _confirmedExit(BuildContext context) {

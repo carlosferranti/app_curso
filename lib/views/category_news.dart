@@ -36,41 +36,6 @@ class _CategoryNewsState extends State<CategoryNews> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: builAppBar(context),
-      // appBar: AppBar(
-      //   elevation: 0.0,
-      //   centerTitle: true,
-      //   title: Row(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: <Widget>[
-      //       Text(
-      //         "Aprovação",
-      //         style: TextStyle(fontSize: 14, color: Colors.deepOrange),
-      //       ),
-      //       Text(
-      //         " | ",
-      //         style: TextStyle(fontSize: 14, color: Colors.grey),
-      //       ),
-      //       Text(
-      //         "News",
-      //         style: TextStyle(
-      //           fontSize: 14,
-      //           color: Colors.deepPurple,
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      //   actions: <Widget>[
-      //     Opacity(
-      //       opacity: 0,
-      //       child: Container(
-      //           padding: EdgeInsets.symmetric(horizontal: 16),
-      //           child: Icon(
-      //             Icons.save,
-      //             color: Colors.black,
-      //           )),
-      //     )
-      //   ],
-      // ),
       body: _loading
           ? Center(
               child: Container(
@@ -78,6 +43,7 @@ class _CategoryNewsState extends State<CategoryNews> {
               ),
             )
           : SingleChildScrollView(
+             padding: EdgeInsets.symmetric(horizontal: 16),
               child: Container(
                 child: Column(
                   children: <Widget>[
