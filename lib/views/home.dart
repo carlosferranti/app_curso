@@ -52,7 +52,6 @@ class _HomeState extends State<Home> {
                 child: Column(children: <Widget>[
                   // Categorias
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
                     height: 70,
                     child: ListView.builder(
                         itemCount: categories.length,

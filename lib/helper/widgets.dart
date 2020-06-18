@@ -1,3 +1,4 @@
+import 'package:app_curso/views/adm_view.dart';
 import 'package:app_curso/views/admin_view.dart';
 import 'package:app_curso/views/home.dart';
 import 'package:app_curso/views/settings_view.dart';
@@ -242,7 +243,7 @@ Widget buildDrawer(BuildContext context) {
 
 var items = [
   {'name': 'Configurações', 'value': 0},
-  {'name': 'Administração', 'value': 1},
+  // {'name': 'Administração', 'value': 1},
   // {'name': 'Google.com', 'value': 2}
 ];
 Widget builAppBar(BuildContext context) {
@@ -283,7 +284,7 @@ Widget builAppBar(BuildContext context) {
                      case 1:
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Admin()),
+                    MaterialPageRoute(builder: (context) => Adm()),
                   );
                   break;
               }

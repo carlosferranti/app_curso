@@ -1,4 +1,6 @@
+import 'package:app_curso/views/favorites_view.dart';
 import 'package:app_curso/views/home.dart';
+import 'package:app_curso/views/news_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_curso/commons/constants.dart' as Constants;
@@ -11,7 +13,7 @@ class Settings extends StatelessWidget {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Curso Aprovação',
-      theme: new ThemeData(        
+      theme: new ThemeData(
         // primarySwatch: Colors.blue,
         primaryColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -31,15 +33,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var items = [
-  {'name': 'Configurações', 'value': 0},
-  // {'name': 'Flutter.io', 'value': 1},
-  // {'name': 'Google.com', 'value': 2}
-];
+    {'name': 'Configurações', 'value': 0},
+    // {'name': 'Flutter.io', 'value': 1},
+    // {'name': 'Google.com', 'value': 2}
+  ];
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: 
-      new AppBar(
+      appBar: new AppBar(
         // backgroundColor: Colors.indigo,
         centerTitle: true,
         title: Row(
@@ -64,29 +65,29 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         // --
         actions: <Widget>[
-        // --
-        PopupMenuButton(
-            onSelected: (x) {
-              switch (x) {
-                case 0:
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Settings()),
-                  );
-                  break;
-                // case 1:
-                //   // do something else
-                //   break;
-              }
-            },
-            icon: Icon(Icons.more_vert),
-            itemBuilder: (context) => items
-                .map<PopupMenuItem>((element) => PopupMenuItem(
-                      child: Text(element['name']),
-                      value: element['value'],
-                    ))
-                .toList())
-      ],
+          // --
+          PopupMenuButton(
+              onSelected: (x) {
+                switch (x) {
+                  case 0:
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Settings()),
+                    );
+                    break;
+                  // case 1:
+                  //   // do something else
+                  //   break;
+                }
+              },
+              icon: Icon(Icons.more_vert),
+              itemBuilder: (context) => items
+                  .map<PopupMenuItem>((element) => PopupMenuItem(
+                        child: Text(element['name']),
+                        value: element['value'],
+                      ))
+                  .toList())
+        ],
         // --
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -102,16 +103,82 @@ class _MyHomePageState extends State<MyHomePage> {
         // --
       ),
       // drawer: menuDrawer(context) ,
-      body: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Text(''),
-          ],
-        ),
-      ),
+      // body: new Center(
+      //   child: new Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: <Widget>[
+      //       new Text(''),
+      //     ],
+      //   ),
+      body: buildBody(),
     );
   }
+}
+
+buildBody() {
+  final titles = ['Upload', 'Configurações', 'Preferências'];
+
+  final icons = [Icons.apps, Icons.settings, Icons.favorite];
+
+  return ListView.builder(
+    itemCount: titles.length,
+    itemBuilder: (context, index) {
+      return Card(
+        //                           <-- Card widget
+        child: ListTile(
+          leading: Icon(icons[index]),
+          title: Text(titles[index]),
+          trailing: Icon(Icons.arrow_forward_ios),
+          onTap: () {
+            print('???????????????' + titles[index]);
+
+            int k = Text(titles[index]) as int;
+
+            switch (k) {
+              case 0: // Upload
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => News()),
+                );
+                break;
+              case 1: // Configurações
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Settings()),
+                );
+                break;
+
+              case 2: // Preferências
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Favorites()),
+                );
+                break;
+            }
+          },
+        ),
+      );
+    },
+  );
+  // return Container(
+  //   padding: EdgeInsets.symmetric(horizontal: 16),
+  //   child: ListView(
+  //     children: <Widget>[
+  //       ListTile(
+  //         leading: Icon(Icons.apps),
+  //         title: Text('Notícias'),
+  //       ),
+  //       ListTile(
+  //         leading: Icon(Icons.settings),
+  //         title: Text('Configurações'),
+  //       ),
+  //       ListTile(
+  //         leading: Icon(Icons.favorite),
+  //         title: Text('Álbum'),
+  //       ),
+  //     ],
+  //   ),
+  // );
 }
 
 // import 'package:flutter/material.dart';
