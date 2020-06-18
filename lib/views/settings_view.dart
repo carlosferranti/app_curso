@@ -11,8 +11,7 @@ class Settings extends StatelessWidget {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Curso Aprovação',
-      theme: new ThemeData(
-        //
+      theme: new ThemeData(        
         // primarySwatch: Colors.blue,
         primaryColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -39,7 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
+      appBar: 
+      new AppBar(
         // backgroundColor: Colors.indigo,
         centerTitle: true,
         title: Row(
@@ -99,6 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ));
           },
         ),
+        // --
       ),
       // drawer: menuDrawer(context) ,
       body: new Center(

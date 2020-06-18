@@ -1,4 +1,4 @@
-import 'package:app_curso/views/admin.dart';
+import 'package:app_curso/views/admin_view.dart';
 import 'package:app_curso/views/home.dart';
 import 'package:app_curso/views/settings_view.dart';
 import 'package:flutter/material.dart';
