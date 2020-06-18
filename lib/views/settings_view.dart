@@ -1,6 +1,7 @@
 import 'package:app_curso/views/favorites_view.dart';
+import 'package:app_curso/views/geral_view.dart';
 import 'package:app_curso/views/home.dart';
-import 'package:app_curso/views/news_view.dart';
+import 'package:app_curso/views/upload_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_curso/commons/constants.dart' as Constants;
@@ -80,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   //   break;
                 }
               },
-              icon: Icon(Icons.more_vert),
+              icon: Icon(Icons.more_vert, color: Colors.transparent,),
               itemBuilder: (context) => items
                   .map<PopupMenuItem>((element) => PopupMenuItem(
                         child: Text(element['name']),
@@ -124,7 +125,7 @@ buildBody() {
     itemCount: titles.length,
     itemBuilder: (context, index) {
       return Card(
-        //                           <-- Card widget
+        //                           <--
         child: ListTile(
           leading: Icon(icons[index]),
           title: Text(titles[index]),
@@ -132,19 +133,19 @@ buildBody() {
           onTap: () {
             print('???????????????' + titles[index]);
 
-            int k = Text(titles[index]) as int;
+            int k = index;
 
             switch (k) {
               case 0: // Upload
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => News()),
+                  MaterialPageRoute(builder: (context) => Upload()),
                 );
                 break;
               case 1: // Configurações
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Settings()),
+                  MaterialPageRoute(builder: (context) => Geral()),
                 );
                 break;
 

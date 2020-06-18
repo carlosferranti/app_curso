@@ -1,6 +1,6 @@
-import 'package:app_curso/helper/widgets.dart';
+import 'package:app_curso/views/news.dart';
+import 'package:app_curso/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:app_curso/helper/news.dart';
 import 'package:app_curso/models/article_model.dart';
 import 'package:app_curso/views/article_view.dart';
 

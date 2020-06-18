@@ -1,4 +1,5 @@
 import 'package:app_curso/views/home.dart';
+import 'package:app_curso/views/settings_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_curso/commons/constants.dart' as Constants;
@@ -79,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 //   break;
               }
             },
-            icon: Icon(Icons.more_vert),
+            icon: Icon(Icons.more_vert, color: Colors.transparent),
             itemBuilder: (context) => items
                 .map<PopupMenuItem>((element) => PopupMenuItem(
                       child: Text(element['name']),
@@ -95,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(
                 context,
                 new MaterialPageRoute(
-                  builder: (BuildContext context) => new Home(),
+                  builder: (BuildContext context) => new Settings(),
                 ));
           },
         ),

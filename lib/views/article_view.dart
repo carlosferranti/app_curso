@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:app_curso/helper/widgets.dart';
+import 'package:app_curso/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
