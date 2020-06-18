@@ -11,7 +11,7 @@ class Adm extends StatelessWidget {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Curso Aprovação',
-      theme: new ThemeData(        
+      theme: new ThemeData(
         // primarySwatch: Colors.blue,
         primaryColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -31,15 +31,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var items = [
-  {'name': 'Configurações', 'value': 0},
-  // {'name': 'Flutter.io', 'value': 1},
-  // {'name': 'Google.com', 'value': 2}
-];
+    {'name': 'Configurações', 'value': 0},
+    // {'name': 'Flutter.io', 'value': 1},
+    // {'name': 'Google.com', 'value': 2}
+  ];
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: 
-      new AppBar(
+      appBar: new AppBar(
         // backgroundColor: Colors.indigo,
         centerTitle: true,
         title: Row(
@@ -64,29 +63,29 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         // --
         actions: <Widget>[
-        // --
-        PopupMenuButton(
-            onSelected: (x) {
-              switch (x) {
-                case 0:
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Adm()),
-                  );
-                  break;
-                // case 1:
-                //   // do something else
-                //   break;
-              }
-            },
-            icon: Icon(Icons.more_vert),
-            itemBuilder: (context) => items
-                .map<PopupMenuItem>((element) => PopupMenuItem(
-                      child: Text(element['name']),
-                      value: element['value'],
-                    ))
-                .toList())
-      ],
+          // --
+          PopupMenuButton(
+              onSelected: (x) {
+                switch (x) {
+                  case 0:
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Adm()),
+                    );
+                    break;
+                  // case 1:
+                  //   // do something else
+                  //   break;
+                }
+              },
+              icon: Icon(Icons.more_vert),
+              itemBuilder: (context) => items
+                  .map<PopupMenuItem>((element) => PopupMenuItem(
+                        child: Text(element['name']),
+                        value: element['value'],
+                      ))
+                  .toList())
+        ],
         // --
         leading: IconButton(
           icon: Icon(Icons.arrow_back),

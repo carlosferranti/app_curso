@@ -1,7 +1,5 @@
 import 'package:app_curso/helper/data_dummer.dart';
-import 'package:app_curso/views/home.dart';
 import 'package:app_curso/views/settings_view.dart';
-import 'package:app_curso/widgets/component.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_curso/commons/constants.dart' as Constants;
@@ -38,6 +36,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // {'name': 'Flutter.io', 'value': 1},
     // {'name': 'Google.com', 'value': 2}
   ];
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController tituloController = new TextEditingController();
+  TextEditingController descricaoController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     final users = {...DUMMY_USER};
@@ -104,33 +105,152 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         // --
       ),
+
+      // --
+
+      // --
+
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          // var person = Noticias()
-          //   ..ativo = true
-          //   ..dataHora = DateTime.now()
-          //   ..name = "";
-
-          // Navigator.push(
-          //     context,
-          //     // MaterialPageRoute(builder: (context) => PersonPage(person)),
-          //     null);
+          //
         },
       ),
       // drawer: menuDrawer(context) ,
-      body: ListView.builder(
-          itemCount: users.length,
-          // itemBuilder: (ctx, i) => Text(users.values.elementAt(i).name)),
-           itemBuilder: (ctx, i) => UserTile(users.values.elementAt(i)),
-      // new Center(
-      //   child: new Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: <Widget>[
-      //       new Text(''),
-      //     ],
+      // body: ListView.builder(
+      //     itemCount: users.length,
+      //     itemBuilder: (ctx, i) => Text(users.values.elementAt(i).name)),
+      // //  itemBuilder: (ctx, i) => UserTile(users.values.elementAt(i)),
+      body:
+          // Container(
+          // padding: EdgeInsets.symmetric(horizontal: 16),
+          // child:
+          Padding(
+        padding: EdgeInsets.all(12),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              // TextFormField(
+              //   decoration: InputDecoration(
+              //     border: InputBorder.none,
+              //     hintText: 'Product Title',
+              //     fillColor: Colors.grey[300],
+              //     filled: true,
+              //   ),
+
+              //   validator: (value) {
+              //     if (value.isEmpty) {
+              //       return 'Please enter Product Title';
+              //     }
+              //   },
+
+              //   // onSaved: (value) => title = value
+              // ),
+              TextFormField(
+                controller: tituloController,
+                decoration:
+                    InputDecoration(labelText: "Título", hintText: "Título"),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              TextFormField(
+                controller: descricaoController,
+                decoration: InputDecoration(
+                    labelText: "Descrição", hintText: "Descrição"),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              // DropdownButton<String>(
+              //   // value: productType,
+
+              //   onChanged: (String newValue) {
+              //     setState(() {
+              //       // productType = newValue;
+              //     });
+              //   },
+
+              //   items: <String>['Bag', 'Computer', 'Dress', 'Phone', 'Shoes']
+              //       .map<DropdownMenuItem<String>>((String value) {
+              //     return DropdownMenuItem<String>(
+              //       value: value,
+              //       child: Text(value),
+              //     );
+              //   }).toList(),
+              // ),
+              // RaisedButton(
+              //   splashColor: Colors.red,
+              //   onPressed: () async {
+              //     if (_formKey.currentState.validate()) {
+              //       _formKey.currentState.save();
+
+              //       // await productProvider.addProduct(Product(name: title,price: price,img: productType.toLowerCase()));
+
+              //       Navigator.pop(context);
+              //     }
+              //   },
+              //   child:
+              //       Text('add Product', style: TextStyle(color: Colors.white)),
+              //   color: Colors.blue,
+              // )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new SizedBox(
+                    width: 140.0,
+                    // height: 100.0,
+                    child: new RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.blue)),
+                      onPressed: () {},
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      child: Text("Cancelar".toUpperCase(),
+                          style: TextStyle(fontSize: 14)),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  SizedBox(
+                    width: 140.0,
+                    // height: 100.0,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.blue)),
+                      onPressed: () {},
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      child: Text("Salvar".toUpperCase(),
+                          style: TextStyle(fontSize: 14)),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+      // TextField(
+      //   decoration: InputDecoration(
+      //     border: OutlineInputBorder(),
       //   ),
       // ),
-    ));
+
+      //     TextField(
+      //   decoration: InputDecoration(
+      //     hintText: "Hint text sample",
+      //     border: OutlineInputBorder(
+      //       borderRadius: BorderRadius.circular(5.0),
+      //       borderSide: BorderSide(
+      //         color: Colors.amber,
+      //         style: BorderStyle.solid,
+      //       ),
+      //     ),
+      //   ),
+      // ),
+    );
   }
 }
