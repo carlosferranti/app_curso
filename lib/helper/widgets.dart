@@ -1,3 +1,4 @@
+import 'package:app_curso/views/admin.dart';
 import 'package:app_curso/views/home.dart';
 import 'package:app_curso/views/settings_view.dart';
 import 'package:flutter/material.dart';
@@ -207,7 +208,7 @@ Widget buildDrawer(BuildContext context) {
 
 var items = [
   {'name': 'Configurações', 'value': 0},
-  // {'name': 'Flutter.io', 'value': 1},
+  {'name': 'Administração', 'value': 1},
   // {'name': 'Google.com', 'value': 2}
 ];
 Widget builAppBar(BuildContext context) {
@@ -245,9 +246,12 @@ Widget builAppBar(BuildContext context) {
                     MaterialPageRoute(builder: (context) => Settings()),
                   );
                   break;
-                // case 1:
-                //   // do something else
-                //   break;
+                     case 1:
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Admin()),
+                  );
+                  break;
               }
             },
             icon: Icon(Icons.more_vert),
