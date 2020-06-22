@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:app_curso/commons/constants.dart' as Constants;
 import 'dart:io';
 
- 
 class CircleIconButton extends StatelessWidget {
   final double size;
   final Function onPressed;
@@ -38,7 +37,6 @@ class CircleIconButton extends StatelessWidget {
             )));
   }
 }
-
 
 Widget buildDrawer(BuildContext context) {
   //
@@ -271,33 +269,46 @@ Widget builAppBar(BuildContext context) {
         ],
       ),
       actions: <Widget>[
+        new Container(
+          alignment: Alignment.bottomLeft,
+          // margin: EdgeInsets.only(top: 20.0, right: 10.0),
+          child: IconButton(
+            icon: Icon(Icons.settings,
+                // size: 24,
+                color: Colors.black),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Settings()),
+            ),
+          ),
+        )
         // --
-        PopupMenuButton(
-            onSelected: (x) {
-              switch (x) {
-                case 0:
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Settings()),
-                  );
-                  break;
-                     case 1:
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Adm()),
-                  );
-                  break;
-              }
-            },
-            icon: Icon(Icons.more_vert),
-            itemBuilder: (context) => items
-                .map<PopupMenuItem>((element) => PopupMenuItem(
-                      child: Text(element['name']),
-                      value: element['value'],
-                    ))
-                .toList())
-      ]
-      );
+        // PopupMenuButton(
+        //     onSelected: (x) {
+        //       switch (x) {
+        //         case 0:
+        //           Navigator.push(
+        //             context,
+        //             MaterialPageRoute(builder: (context) => Settings()),
+        //           );
+        //           break;
+        //         case 1:
+        //           Navigator.push(
+        //             context,
+        //             MaterialPageRoute(builder: (context) => Adm()),
+        //           );
+        //           break;
+        //       }
+        //     },
+        //     // icon: Icon(Icons.more_vert),
+        //     icon: Icon(Icons.settings),
+        //     itemBuilder: (context) => items
+        //         .map<PopupMenuItem>((element) => PopupMenuItem(
+        //               child: Text(element['name']),
+        //               value: element['value'],
+        //             ))
+        //         .toList())
+      ]);
 }
 
 _confirmedExit(BuildContext context) {
