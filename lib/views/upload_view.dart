@@ -52,8 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   //
   final _formKey = GlobalKey<FormState>();
-  TextEditingController tituloController = new TextEditingController();
-  TextEditingController descricaoController = new TextEditingController();
+  
+  TextEditingController _tituloController = new TextEditingController();
+  TextEditingController _descricaoController = new TextEditingController();
   //
 
   File _image;
@@ -119,115 +120,119 @@ class _MyHomePageState extends State<MyHomePage> {
 
     String _dateTime = '${DateTime.now()}';
 
-    return new Scaffold(
-      appBar: new AppBar(
-        // backgroundColor: Colors.indigo,
-        centerTitle: true,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Aprovação",
-              style: TextStyle(fontSize: 12, color: Colors.deepOrange),
+    // var _tituloInputController;
+        return new Scaffold(
+          appBar: new AppBar(
+            // backgroundColor: Colors.indigo,
+            centerTitle: true,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Aprovação",
+                  style: TextStyle(fontSize: 12, color: Colors.deepOrange),
+                ),
+                Text(
+                  " | ",
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+                Text(
+                  "News",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.deepPurple,
+                  ),
+                ),
+              ],
             ),
-            Text(
-              " | ",
-              style: TextStyle(fontSize: 12, color: Colors.grey),
+            // --
+            actions: <Widget>[
+              // --
+              //     Icon(Icons.delete),
+              //        SizedBox(
+              //       width: 10.0,
+              //     ),
+              // Icon(Icons.settings),
+              IconButton(
+                  icon: Icon(Icons.delete),
+                  //  icon: Icon(FontAwesomeIcons.trash),
+                  onPressed: () {
+                    print('!!!!!!!!!!!!!!!!! delete');
+                  }),
+              IconButton(
+                  // icon: Icon(Icons.add_circle),
+                  icon: Icon(Icons.add),
+                  //  icon: Icon(FontAwesomeIcons.plus),
+                  onPressed: () {
+                    print('!!!!!!!!!!!!!!!!! add');
+                  }),
+            ],
+            // --
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              // onPressed:() => Navigator.pushReplacementNamed(context, "/home-page"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                    builder: (BuildContext context) => new Settings(),
+                  ),
+                );
+              },
             ),
-            Text(
-              "News",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.deepPurple,
-              ),
-            ),
-          ],
-        ),
-        // --
-        actions: <Widget>[
+          ),
           // --
-          //     Icon(Icons.delete),
-          //        SizedBox(
-          //       width: 10.0,
-          //     ),
-          // Icon(Icons.settings),
-          IconButton(
-              icon: Icon(Icons.delete),
-              //  icon: Icon(FontAwesomeIcons.trash),
-              onPressed: () {
-                print('!!!!!!!!!!!!!!!!! delete');
-              }),
-          IconButton(
-              // icon: Icon(Icons.add_circle),
-              icon: Icon(Icons.add),
-              //  icon: Icon(FontAwesomeIcons.plus),
-              onPressed: () {
-                print('!!!!!!!!!!!!!!!!! add');
-              }),
-        ],
-        // --
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          // onPressed:() => Navigator.pushReplacementNamed(context, "/home-page"),
-          onPressed: () {
-            Navigator.push(
-                context,
-                new MaterialPageRoute(
-                  builder: (BuildContext context) => new Settings(),
-                ));
-          },
-        ),
-        // --
-      ),
-      // --
-      //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      // --
-      // SingleChildScrollView
-      body: ListView(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.all(8.0),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
-              child: InkWell(
-                onTap: () => print("ciao"),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch, // add this
-                  children: <Widget>[
-                    ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8.0),
-                          topRight: Radius.circular(8.0),
+          //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+          // --
+          // SingleChildScrollView
+          body: ListView(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(8.0),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  child: InkWell(
+                    onTap: () => print("ciao"),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch, // add this
+                      children: <Widget>[
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8.0),
+                            topRight: Radius.circular(8.0),
+                          ),
+                          // child: Image.network('https://placeimg.com/640/480/any',
+                          child: GestureDetector(
+                            onTap: () {
+                              print('GestureDetector');
+                              _showSelectionDialog(context);
+                            },
+                            child: _image == null
+                                ? Image.asset(
+                                    'assets/images/image_not_found.png',
+                                    //                             height: 350,
+                                    //                             width: 300,
+                                    // ) ,
+                                    // width: 300,
+                                    // height: 150,
+                                  )
+                                : Image.file(_image),
+                          ),
                         ),
-                        // child: Image.network('https://placeimg.com/640/480/any',
-                        child: GestureDetector(
-                          onTap: () {
-                            print('GestureDetector');
-                            _showSelectionDialog(context);
-                          },
-                          child: _image == null
-                              ? Image.asset(
-                                  'assets/images/image_not_found.png',
-                                  //                             height: 350,
-                                  //                             width: 300,
-                                  // ) ,
-                                  // width: 300,
-                                  // height: 150,
-                                )
-                              : Image.file(_image),
-                        )),
-                    ListTile(
-                      // title: Text('Pub 1'),
-                      title: new TextField(
+                        ListTile(
+                          // title: Text('Pub 1'),
+                          title: new TextField(
+                            controller:  _tituloController,
                         decoration: new InputDecoration(
                           hintText: "Título",
                         ),
                       ),
                       // subtitle: Text('Location 1'),
                       subtitle: new TextField(
+                          controller:  _descricaoController,
                         decoration: new InputDecoration(
-                          hintText: "Texto",
+                          hintText: "Descrição",
                         ),
                       ),
                     ),
@@ -245,7 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 width: 110,
                 child: RaisedButton(
-                    // padding: const EdgeInsets.all(8.0),
+                  // padding: const EdgeInsets.all(8.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(18.0),
                     side: BorderSide(color: Colors.blue),
@@ -265,7 +270,7 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 width: 110,
                 child: RaisedButton(
-                    // padding: const EdgeInsets.all(8.0),
+                  // padding: const EdgeInsets.all(8.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
                     side: BorderSide(color: Colors.blue),
