@@ -21,6 +21,7 @@ dependencies:
   path_provider: ^1.6.11
   provider: ^4.1.3
   font_awesome_flutter: ^8.8.1
+  unicorndial: ^1.1.5
 
   cupertino_icons: ^0.1.3
 
@@ -45,6 +46,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
     - assets/images/background_new.jpg
     - assets/images/aprovacao3.png
+    - assets/images/image_not_found.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
