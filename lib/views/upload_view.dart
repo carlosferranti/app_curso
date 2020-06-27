@@ -51,8 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
     // {'name': 'Google.com', 'value': 2}
   ];
   //
-  final _formKey = GlobalKey<FormState>();
-  
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  bool _validate = false;
+
   TextEditingController _tituloController = new TextEditingController();
   TextEditingController _descricaoController = new TextEditingController();
   //
@@ -61,8 +64,6 @@ class _MyHomePageState extends State<MyHomePage> {
   //
   @override
   Widget build(BuildContext context) {
-    Color backgroundColor = Theme.of(context).cardColor;
-    Color foregroundColor = Theme.of(context).accentColor;
     //
     _openGallery(BuildContext context) async {
       //
@@ -121,122 +122,164 @@ class _MyHomePageState extends State<MyHomePage> {
     String _dateTime = '${DateTime.now()}';
 
     // var _tituloInputController;
-        return new Scaffold(
-          appBar: new AppBar(
-            // backgroundColor: Colors.indigo,
-            centerTitle: true,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "Aprovação",
-                  style: TextStyle(fontSize: 12, color: Colors.deepOrange),
-                ),
-                Text(
-                  " | ",
-                  style: TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-                Text(
-                  "News",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.deepPurple,
-                  ),
-                ),
-              ],
+    return new Scaffold(
+      key: _scaffoldKey,
+      appBar: new AppBar(
+        // backgroundColor: Colors.indigo,
+        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "Aprovação",
+              style: TextStyle(fontSize: 12, color: Colors.deepOrange),
             ),
-            // --
-            actions: <Widget>[
-              // --
-              //     Icon(Icons.delete),
-              //        SizedBox(
-              //       width: 10.0,
-              //     ),
-              // Icon(Icons.settings),
-              IconButton(
-                  icon: Icon(Icons.delete),
-                  //  icon: Icon(FontAwesomeIcons.trash),
-                  onPressed: () {
-                    print('!!!!!!!!!!!!!!!!! delete');
-                  }),
-              IconButton(
-                  // icon: Icon(Icons.add_circle),
-                  icon: Icon(Icons.add),
-                  //  icon: Icon(FontAwesomeIcons.plus),
-                  onPressed: () {
-                    print('!!!!!!!!!!!!!!!!! add');
-                  }),
-            ],
-            // --
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              // onPressed:() => Navigator.pushReplacementNamed(context, "/home-page"),
+            Text(
+              " | ",
+              style: TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+            Text(
+              "News",
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.deepPurple,
+              ),
+            ),
+          ],
+        ),
+        // --
+        actions: <Widget>[
+          // --
+          //     Icon(Icons.delete),
+          //        SizedBox(
+          //       width: 10.0,
+          //     ),
+          // Icon(Icons.settings),
+          IconButton(
+              icon: Icon(Icons.delete),
+              //  icon: Icon(FontAwesomeIcons.trash),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                    builder: (BuildContext context) => new Settings(),
+                print('!!!!!!!!!!!!!!!!! delete');
+              }),
+          IconButton(
+              // icon: Icon(Icons.add_circle),
+              icon: Icon(Icons.add),
+              //  icon: Icon(FontAwesomeIcons.plus),
+              onPressed: () {
+                print('!!!!!!!!!!!!!!!!! add');
+              }),
+        ],
+        // --
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          // onPressed:() => Navigator.pushReplacementNamed(context, "/home-page"),
+          onPressed: () {
+            Navigator.push(
+              context,
+              new MaterialPageRoute(
+                builder: (BuildContext context) => new Settings(),
+              ),
+            );
+          },
+        ),
+      ),
+      // --
+      //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      // --
+      // SingleChildScrollView
+      body: ListView(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.all(8.0),
+            child: Form(
+              key: _formKey,
+              autovalidate: _validate,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                child: InkWell(
+                  onTap: () => print("ciao"),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch, // add this
+                    children: <Widget>[
+                      ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8.0),
+                          topRight: Radius.circular(8.0),
+                        ),
+                        // child: Image.network('https://placeimg.com/640/480/any',
+                        child: GestureDetector(
+                          onTap: () {
+                            print('GestureDetector');
+                            _showSelectionDialog(context);
+                          },
+                          child: _image == null
+                              ? Image.asset(
+                                  'assets/images/image_not_found.png',
+                                )
+                              : Image.file(_image),
+                        ),
+                      ),
+                      ListTile(
+                        title: new TextFormField(
+                          validator: _validarNome,
+                          controller: _tituloController,
+                          decoration: new InputDecoration(
+                            hintText: "Título",
+                          ),
+                        ),
+                        subtitle: new TextFormField(
+                          validator: _validarDescricao,
+                          controller: _descricaoController,
+                          decoration: new InputDecoration(
+                            hintText: "Descrição",
+                          ),
+                        ),
+                      ),
+                      Container(
+                        // color: Colors.blue,
+                        child: new ButtonBar(
+                          children: <Widget>[
+                            new FlatButton(
+                              child: const Text(
+                                'Cancelar',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  new MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        new Settings(),
+                                  ),
+                                );
+                              },
+                            ),
+                            new FlatButton(
+                              child: const Text(
+                                "Salvar",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              onPressed: () {
+                                // se não for válido
+                                if (!_formKey.currentState.validate()) {
+                                  _scaffoldKey.currentState.showSnackBar(
+                                      new SnackBar(
+                                          content: new Text(
+                                              'Erro no processo de gravação')));
+                                } else {
+                                  _formKey.currentState.save();
+                                  _scaffoldKey.currentState.showSnackBar(
+                                      new SnackBar(
+                                          content: new Text('Dados salvos!')));
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                );
-              },
-            ),
-          ),
-          // --
-          //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-          // --
-          // SingleChildScrollView
-          body: ListView(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(8.0),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  child: InkWell(
-                    onTap: () => print("ciao"),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch, // add this
-                      children: <Widget>[
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(8.0),
-                            topRight: Radius.circular(8.0),
-                          ),
-                          // child: Image.network('https://placeimg.com/640/480/any',
-                          child: GestureDetector(
-                            onTap: () {
-                              print('GestureDetector');
-                              _showSelectionDialog(context);
-                            },
-                            child: _image == null
-                                ? Image.asset(
-                                    'assets/images/image_not_found.png',
-                                    //                             height: 350,
-                                    //                             width: 300,
-                                    // ) ,
-                                    // width: 300,
-                                    // height: 150,
-                                  )
-                                : Image.file(_image),
-                          ),
-                        ),
-                        ListTile(
-                          // title: Text('Pub 1'),
-                          title: new TextField(
-                            controller:  _tituloController,
-                        decoration: new InputDecoration(
-                          hintText: "Título",
-                        ),
-                      ),
-                      // subtitle: Text('Location 1'),
-                      subtitle: new TextField(
-                          controller:  _descricaoController,
-                        decoration: new InputDecoration(
-                          hintText: "Descrição",
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ),
             ),
@@ -244,47 +287,30 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(
             height: 20.0,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(
-                width: 110,
-                child: RaisedButton(
-                  // padding: const EdgeInsets.all(8.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.blue),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                          builder: (BuildContext context) => new Settings(),
-                        ));
-                  },
-                  child: Text("Cancelar", style: TextStyle(fontSize: 12)),
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                ),
-              ),
-              SizedBox(
-                width: 110,
-                child: RaisedButton(
-                  // padding: const EdgeInsets.all(8.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                    side: BorderSide(color: Colors.blue),
-                  ),
-                  onPressed: () {},
-                  child: Text("Salvar", style: TextStyle(fontSize: 12)),
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                ),
-              ),
-            ],
-          ),
         ],
       ),
     );
+  }
+
+  String _validarNome(String value) {
+    String patttern = r'(^[a-zA-Z ]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return "Obrigatório";
+    } else if (!regExp.hasMatch(value)) {
+      return "O nome deve conter caracteres de a-z ou A-Z";
+    }
+    return null;
+  }
+
+  String _validarDescricao(String value) {
+    String patttern = r'(^[a-zA-Z ]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return "Obrigatório";
+    } else if (!regExp.hasMatch(value)) {
+      return "O nome deve conter caracteres de a-z ou A-Z";
+    }
+    return null;
   }
 }
