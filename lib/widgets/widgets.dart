@@ -1,3 +1,5 @@
+import 'package:app_curso/models/article_model.dart';
+import 'package:app_curso/models/category_model.dart';
 import 'package:app_curso/views/adm_view.dart';
 import 'package:app_curso/views/admin_view.dart';
 import 'package:app_curso/views/home.dart';
@@ -7,6 +9,8 @@ import 'package:app_curso/commons/constants.dart' as Constants;
 import 'dart:io';
 
 class CircleIconButton extends StatelessWidget {
+  // --
+
   final double size;
   final Function onPressed;
   final IconData icon;
@@ -244,6 +248,7 @@ var items = [
   // {'name': 'Administração', 'value': 1},
   // {'name': 'Google.com', 'value': 2}
 ];
+
 Widget builAppBar(BuildContext context) {
   return AppBar(
       elevation: 0.0,
@@ -253,16 +258,16 @@ Widget builAppBar(BuildContext context) {
         children: <Widget>[
           Text(
             "Aprovação",
-            style: TextStyle(fontSize: 14, color: Colors.deepOrange),
+            style: TextStyle(fontSize: 12, color: Colors.deepOrange),
           ),
           Text(
             " | ",
-            style: TextStyle(fontSize: 14, color: Colors.grey),
+            style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
           Text(
             "News",
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 12,
               color: Colors.deepPurple,
             ),
           ),
@@ -270,7 +275,21 @@ Widget builAppBar(BuildContext context) {
       ),
       actions: <Widget>[
         new Container(
-          alignment: Alignment.bottomLeft,
+          // alignment: Alignment.bottomLeft,
+          // margin: EdgeInsets.only(top: 20.0, right: 10.0),
+          child: IconButton(
+            icon: Icon(Icons.refresh,
+                // size: 24,
+                color: Colors.black),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Settings()),
+            ),
+            // LoadScreen(categories: categories, articles: articles),
+          ),
+        ),
+        new Container(
+          // alignment: Alignment.bottomLeft,
           // margin: EdgeInsets.only(top: 20.0, right: 10.0),
           child: IconButton(
             icon: Icon(Icons.settings,
@@ -281,7 +300,7 @@ Widget builAppBar(BuildContext context) {
               MaterialPageRoute(builder: (context) => Settings()),
             ),
           ),
-        )
+        ),
         // --
         // PopupMenuButton(
         //     onSelected: (x) {

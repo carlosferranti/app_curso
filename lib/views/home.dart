@@ -87,6 +87,61 @@ class _HomeState extends State<Home> {
   }
 }
 
+class LoadScreen extends StatelessWidget {
+  const LoadScreen({
+    Key key,
+    @required this.categories,
+    @required this.articles,
+  }) : super(key: key);
+
+  final List<CategoryModel> categories;
+  final List<ArticleModel> articles;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Column(children: <Widget>[
+          // Categorias
+          // ShowCategory(categories: categories),
+          // Articles
+          // ShowArticles(articles: articles),
+          Container(
+            height: 70,
+            child: ListView.builder(
+                itemCount: categories.length,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return CategoryTile(
+                    imageUrl: categories[index].imageUrl,
+                    categoryName: categories[index].categoryName,
+                  );
+                }),
+          ), // Articles
+          // ShowArticles(articles: articles),
+          Container(
+            padding: EdgeInsets.only(top: 16),
+            child: ListView.builder(
+                itemCount: articles.length,
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return BlogTile(
+                    imageUrl: articles[index].urlToImage,
+                    title: articles[index].title,
+                    desc: articles[index].description,
+                    url: articles[index].url,
+                  );
+                }),
+          ),
+        ]),
+      ),
+    );
+  }
+}
+
 class CategoryTile extends StatelessWidget {
   final String imageUrl, categoryName;
 
