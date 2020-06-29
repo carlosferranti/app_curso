@@ -80,6 +80,12 @@
       "languageVersion": "2.2"
     },
     {
+      "name": "flutter_blurhash",
+      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blurhash-0.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.4"
+    },
+    {
       "name": "flutter_cache_manager",
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_cache_manager-1.4.1",
       "packageUri": "lib/",
@@ -156,6 +162,12 @@
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/nested-0.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.2"
+    },
+    {
+      "name": "octo_image",
+      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/octo_image-0.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
     },
     {
       "name": "path",
@@ -344,7 +356,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-06-27T15:07:01.894821Z",
+  "generated": "2020-06-29T02:39:19.580788Z",
   "generator": "pub",
   "generatorVersion": "2.8.4"
 }

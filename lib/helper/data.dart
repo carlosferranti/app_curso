@@ -1,4 +1,7 @@
+import 'package:app_curso/models/article_model.dart';
 import 'package:app_curso/models/category_model.dart';
+import 'package:app_curso/views/home.dart';
+import 'package:flutter/material.dart';
 
 List<CategoryModel> getCategories() {
   List<CategoryModel> category = new List<CategoryModel>();
@@ -45,3 +48,38 @@ List<CategoryModel> getCategories() {
 
   return category;
 }
+
+// ---
+
+// ListView buildListViewCategories(BuildContext context) {
+//   List<CategoryModel> categories = new List<CategoryModel>();
+
+//   return ListView.builder(
+//       itemCount: categories.length,
+//       shrinkWrap: true,
+//       scrollDirection: Axis.horizontal,
+//       itemBuilder: (context, index) {
+//         return CategoryTile(
+//           imageUrl: categories[index].imageUrl,
+//           categoryName: categories[index].categoryName,
+//         );
+//       });
+// }
+
+// ListView buildListViewArticles(BuildContext context) {
+//   List<ArticleModel> articles = new List<ArticleModel>();
+
+//   return ListView.builder(
+//     itemCount: articles.length,
+//     shrinkWrap: true,
+//     physics: ClampingScrollPhysics(),
+//     itemBuilder: (context, index) {
+//       return BlogTile(
+//         imageUrl: articles[index].urlToImage,
+//         title: articles[index].title,
+//         desc: articles[index].description,
+//         url: articles[index].url,
+//       );
+//     },
+//   );
+// }

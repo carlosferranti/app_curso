@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:app_curso/helper/data_dummer.dart';
 import 'package:app_curso/views/settings_view.dart';
+import 'package:app_curso/views/uploads_list_view.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_curso/commons/constants.dart' as Constants;
@@ -9,9 +11,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:math' as math;
 
-void main() => runApp(new Upload());
+import 'package:octo_image/octo_image.dart';
+
+void main() => runApp(new Upload(
+      txtTitulo: null, txtDescricao: null,
+    ));
 
 class Upload extends StatelessWidget {
+  const Upload({Key key, @required this.txtTitulo, @required this.txtDescricao})
+      : super(key: key);
+  final String txtTitulo, txtDescricao;
+  //
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -22,23 +32,20 @@ class Upload extends StatelessWidget {
         primaryColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: new MyHomePage(title: 'App'),
+      home: new MyHomePage(titulo: txtTitulo, descricao: txtDescricao),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  MyHomePage({Key key, this.titulo, this.descricao}) : super(key: key);
+  final String titulo, descricao;
 
   @override
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // --
-  AnimationController _controller;
-
   static const List<IconData> icons = const [
     Icons.sms,
     Icons.mail,
@@ -55,12 +62,43 @@ class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   bool _validate = false;
+  final _tituloController = new TextEditingController();
+  final _descricaoController = new TextEditingController();
+  //
+  @override
+  void initState() {
+    super.initState();
 
-  TextEditingController _tituloController = new TextEditingController();
-  TextEditingController _descricaoController = new TextEditingController();
+    setState(() {
+      _loading = false;
+      _tituloController.text = widget.titulo;
+      _descricaoController.text = widget.descricao;
+    });
+  }
+
+  //
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    _tituloController.dispose();
+    super.dispose();
+  }
+
+  //
+  File _image;
+  //
+  // @override
+  // void initState() {
+  //   _loading = true;
+  //   // TODO: implement initState
+  //   super.initState();
+  // }
+  bool _loading = true;
+
   //
 
-  File _image;
+  // Future<List>
+
   //
   @override
   Widget build(BuildContext context) {
@@ -84,7 +122,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     // --
-
     Future<void> _showSelectionDialog(BuildContext context) {
       return showDialog(
           context: context,
@@ -114,14 +151,47 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     // --
-
     final users = {...DUMMY_USER};
-
     Size size = MediaQuery.of(context).size;
-
     String _dateTime = '${DateTime.now()}';
 
-    // var _tituloInputController;
+    print(' widget.titulo ->> ' + widget.titulo);
+
+    // final _titulo = new TextFormField(
+    //   // initialValue: widget.titulo,
+    //   // onChanged: (text) {
+    //   //   print("First text field: $text");
+    //   // },
+    //   //  initialValue: 'your initial text',
+    //   onChanged: (text) => {widget.titulo},
+    //   validator: _validarNome,
+    //   controller: _tituloController,
+    //   decoration: new InputDecoration(
+    //     hintText: "Título",
+    //   ),
+    // );
+
+    final _titulo = new TextField(
+      // initialValue: widget.titulo,
+      // onChanged: (text) {
+      //   print("First text field: $text");
+      // },
+      //  initialValue: 'your initial text',
+      // validator: _validarNome,
+      controller: _tituloController,
+      decoration: new InputDecoration(
+        hintText: "Título",
+      ),
+    );
+
+    final _subTitulo = new TextFormField(
+      validator: _validarDescricao,
+      controller: _descricaoController,
+      decoration: new InputDecoration(
+        hintText: "Descrição",
+      ),
+    );
+
     return new Scaffold(
       key: _scaffoldKey,
       appBar: new AppBar(
@@ -150,145 +220,130 @@ class _MyHomePageState extends State<MyHomePage> {
         // --
         actions: <Widget>[
           // --
-          //     Icon(Icons.delete),
-          //        SizedBox(
-          //       width: 10.0,
-          //     ),
-          // Icon(Icons.settings),
           IconButton(
-              icon: Icon(Icons.delete),
-              //  icon: Icon(FontAwesomeIcons.trash),
-              onPressed: () {
-                print('!!!!!!!!!!!!!!!!! delete');
-              }),
-          IconButton(
-              // icon: Icon(Icons.add_circle),
-              icon: Icon(Icons.add),
-              //  icon: Icon(FontAwesomeIcons.plus),
-              onPressed: () {
-                print('!!!!!!!!!!!!!!!!! add');
-              }),
+            icon: Icon(Icons.search),
+            onPressed: () {/*  */},
+            color: Colors.transparent,
+          ),
         ],
         // --
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          // onPressed:() => Navigator.pushReplacementNamed(context, "/home-page"),
           onPressed: () {
             Navigator.push(
               context,
               new MaterialPageRoute(
-                builder: (BuildContext context) => new Settings(),
+                builder: (BuildContext context) => new UploadsList(),
               ),
             );
           },
         ),
       ),
       // --
-      //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      // --
       // SingleChildScrollView
-      body: ListView(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.all(8.0),
-            child: Form(
-              key: _formKey,
-              autovalidate: _validate,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                child: InkWell(
-                  onTap: () => print("ciao"),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch, // add this
-                    children: <Widget>[
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8.0),
-                          topRight: Radius.circular(8.0),
-                        ),
-                        // child: Image.network('https://placeimg.com/640/480/any',
-                        child: GestureDetector(
-                          onTap: () {
-                            print('GestureDetector');
-                            _showSelectionDialog(context);
-                          },
-                          child: _image == null
-                              ? Image.asset(
-                                  'assets/images/image_not_found.png',
-                                )
-                              : Image.file(_image),
-                        ),
-                      ),
-                      ListTile(
-                        title: new TextFormField(
-                          validator: _validarNome,
-                          controller: _tituloController,
-                          decoration: new InputDecoration(
-                            hintText: "Título",
-                          ),
-                        ),
-                        subtitle: new TextFormField(
-                          validator: _validarDescricao,
-                          controller: _descricaoController,
-                          decoration: new InputDecoration(
-                            hintText: "Descrição",
-                          ),
-                        ),
-                      ),
-                      Container(
-                        // color: Colors.blue,
-                        child: new ButtonBar(
+
+      body: _loading
+          ? Center(
+              child: Container(
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : ListView(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.all(8.0),
+                  child: Form(
+                    key: _formKey,
+                    autovalidate: _validate,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                      child: InkWell(
+                        onTap: () => print("ciao"),
+                        child: Column(
+                          crossAxisAlignment:
+                              CrossAxisAlignment.stretch, // add this
+
                           children: <Widget>[
-                            new FlatButton(
-                              child: const Text(
-                                'Cancelar',
-                                style: TextStyle(fontSize: 14),
+                            // Center(child: CircularProgressIndicator()),
+                            ClipRRect(
+                              // borderRadius: BorderRadius.only(
+                              //   topLeft: Radius.circular(8.0),
+                              //   topRight: Radius.circular(8.0),
+                              // ),
+                              borderRadius: new BorderRadius.circular(8.0),
+                              // child: Image.network('https://placeimg.com/640/480/any',
+                              child: GestureDetector(
+                                onTap: () {
+                                  print('GestureDetector');
+                                  _showSelectionDialog(context);
+                                },
+                                child: _image == null
+                                    ? Image.asset(
+                                        'assets/images/image_not_found.png',
+                                      )
+                                    : Image.file(_image),
                               ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  new MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        new Settings(),
+                            ),
+
+                            ListTile(
+                              title: _titulo,
+                              subtitle: _subTitulo,
+                            ),
+                            Container(
+                              // color: Colors.blue,
+                              child: new ButtonBar(
+                                children: <Widget>[
+                                  new FlatButton(
+                                    child: const Text(
+                                      'Cancelar',
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        new MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              new UploadsList(),
+                                        ),
+                                      );
+                                    },
                                   ),
-                                );
-                              },
-                            ),
-                            new FlatButton(
-                              child: const Text(
-                                "Salvar",
-                                style: TextStyle(fontSize: 14),
+                                  new FlatButton(
+                                    child: const Text(
+                                      "Salvar",
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                    onPressed: () {
+                                      // se não for válido
+                                      if (!_formKey.currentState.validate()) {
+                                        _scaffoldKey.currentState.showSnackBar(
+                                            new SnackBar(
+                                                content: new Text(
+                                                    'Erro no processo de gravação')));
+                                      } else {
+                                        _formKey.currentState.save();
+                                        _scaffoldKey.currentState.showSnackBar(
+                                            new SnackBar(
+                                                content:
+                                                    new Text('Dados salvos!')));
+                                      }
+                                    },
+                                  ),
+                                ],
                               ),
-                              onPressed: () {
-                                // se não for válido
-                                if (!_formKey.currentState.validate()) {
-                                  _scaffoldKey.currentState.showSnackBar(
-                                      new SnackBar(
-                                          content: new Text(
-                                              'Erro no processo de gravação')));
-                                } else {
-                                  _formKey.currentState.save();
-                                  _scaffoldKey.currentState.showSnackBar(
-                                      new SnackBar(
-                                          content: new Text('Dados salvos!')));
-                                }
-                              },
-                            ),
+                            )
                           ],
                         ),
-                      )
-                    ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                SizedBox(
+                  height: 20.0,
+                ),
+              ],
             ),
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-        ],
-      ),
     );
   }
 

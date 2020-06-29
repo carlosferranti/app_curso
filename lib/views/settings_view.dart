@@ -1,6 +1,7 @@
 import 'package:app_curso/views/favorites_view.dart';
 import 'package:app_curso/views/geral_view.dart';
 import 'package:app_curso/views/home.dart';
+import 'package:app_curso/views/uploads_list_view.dart';
 import 'package:app_curso/views/upload_view.dart';
 import 'package:flutter/material.dart';
 
@@ -117,9 +118,11 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 buildBody() {
-  final titles = ['Upload', 'Configurações', 'Preferências'];
+  // final titles = ['Upload', 'Configurações', 'Preferências'];
+  final titles = ['Upload'];
 
-  final icons = [Icons.apps, Icons.settings, Icons.favorite];
+  // final icons = [Icons.file_upload, Icons.settings, Icons.favorite];
+  final icons = [Icons.file_upload];
 
   return ListView.builder(
     itemCount: titles.length,
@@ -139,7 +142,8 @@ buildBody() {
               case 0: // Upload
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Upload()),
+                  // MaterialPageRoute(builder: (context) => Upload()),
+                  MaterialPageRoute(builder: (context) => UploadsList()),
                 );
                 break;
               case 1: // Configurações

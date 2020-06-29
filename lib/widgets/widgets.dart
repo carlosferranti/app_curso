@@ -1,8 +1,9 @@
+import 'package:app_curso/helper/data.dart';
 import 'package:app_curso/models/article_model.dart';
 import 'package:app_curso/models/category_model.dart';
 import 'package:app_curso/views/adm_view.dart';
-import 'package:app_curso/views/admin_view.dart';
 import 'package:app_curso/views/home.dart';
+import 'package:app_curso/views/uploads_list_view.dart';
 import 'package:app_curso/views/settings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:app_curso/commons/constants.dart' as Constants;
@@ -251,83 +252,70 @@ var items = [
 
 Widget builAppBar(BuildContext context) {
   return AppBar(
-      elevation: 0.0,
-      centerTitle: true,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Aprovação",
-            style: TextStyle(fontSize: 12, color: Colors.deepOrange),
+    elevation: 0.0,
+    centerTitle: true,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          "Aprovação",
+          style: TextStyle(fontSize: 12, color: Colors.deepOrange),
+        ),
+        Text(
+          " | ",
+          style: TextStyle(fontSize: 12, color: Colors.grey),
+        ),
+        Text(
+          "News",
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.deepPurple,
           ),
-          Text(
-            " | ",
-            style: TextStyle(fontSize: 12, color: Colors.grey),
+        ),
+      ],
+    ),
+    actions: <Widget>[
+      new Container(
+        // alignment: Alignment.bottomLeft,
+        // margin: EdgeInsets.only(top: 20.0, right: 10.0),
+        child: IconButton(
+          icon: Icon(Icons.settings,
+              // size: 24,
+              color: Colors.black),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Settings()),
           ),
-          Text(
-            "News",
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.deepPurple,
-            ),
-          ),
-        ],
+        ),
       ),
-      actions: <Widget>[
-        new Container(
-          // alignment: Alignment.bottomLeft,
-          // margin: EdgeInsets.only(top: 20.0, right: 10.0),
-          child: IconButton(
-            icon: Icon(Icons.refresh,
-                // size: 24,
-                color: Colors.black),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Settings()),
-            ),
-            // LoadScreen(categories: categories, articles: articles),
-          ),
-        ),
-        new Container(
-          // alignment: Alignment.bottomLeft,
-          // margin: EdgeInsets.only(top: 20.0, right: 10.0),
-          child: IconButton(
-            icon: Icon(Icons.settings,
-                // size: 24,
-                color: Colors.black),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Settings()),
-            ),
-          ),
-        ),
-        // --
-        // PopupMenuButton(
-        //     onSelected: (x) {
-        //       switch (x) {
-        //         case 0:
-        //           Navigator.push(
-        //             context,
-        //             MaterialPageRoute(builder: (context) => Settings()),
-        //           );
-        //           break;
-        //         case 1:
-        //           Navigator.push(
-        //             context,
-        //             MaterialPageRoute(builder: (context) => Adm()),
-        //           );
-        //           break;
-        //       }
-        //     },
-        //     // icon: Icon(Icons.more_vert),
-        //     icon: Icon(Icons.settings),
-        //     itemBuilder: (context) => items
-        //         .map<PopupMenuItem>((element) => PopupMenuItem(
-        //               child: Text(element['name']),
-        //               value: element['value'],
-        //             ))
-        //         .toList())
-      ]);
+      // --
+      // PopupMenuButton(
+      //     onSelected: (x) {
+      //       switch (x) {
+      //         case 0:
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => Settings()),
+      //           );
+      //           break;
+      //         case 1:
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => Adm()),
+      //           );
+      //           break;
+      //       }
+      //     },
+      //     // icon: Icon(Icons.more_vert),
+      //     icon: Icon(Icons.settings),
+      //     itemBuilder: (context) => items
+      //         .map<PopupMenuItem>((element) => PopupMenuItem(
+      //               child: Text(element['name']),
+      //               value: element['value'],
+      //             ))
+      //         .toList())
+    ],
+  );
 }
 
 _confirmedExit(BuildContext context) {
