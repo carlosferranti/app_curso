@@ -3,18 +3,15 @@ import 'dart:io';
 import 'package:app_curso/helper/data_dummer.dart';
 import 'package:app_curso/views/settings_view.dart';
 import 'package:app_curso/views/uploads_list_view.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
 import 'package:app_curso/commons/constants.dart' as Constants;
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:math' as math;
 
-import 'package:octo_image/octo_image.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() => runApp(new Upload(
-      txtTitulo: null, txtDescricao: null,
+      txtTitulo: null,
+      txtDescricao: null,
     ));
 
 class Upload extends StatelessWidget {

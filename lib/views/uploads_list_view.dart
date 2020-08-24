@@ -5,8 +5,6 @@ import 'package:app_curso/views/settings_view.dart';
 import 'package:app_curso/views/upload_view.dart';
 import 'package:flutter/material.dart';
 import 'package:app_curso/commons/constants.dart' as Constants;
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math' as math;
 
 import 'dart:convert';

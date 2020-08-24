@@ -1,12 +1,12 @@
 import 'package:app_curso/views/category_news.dart';
 import 'package:app_curso/views/news.dart';
 import 'package:app_curso/widgets/widgets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:app_curso/helper/data.dart';
 import 'package:app_curso/models/article_model.dart';
 import 'package:app_curso/models/category_model.dart';
 import 'package:app_curso/views/article_view.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
                 child: Column(children: <Widget>[
                   // Categorias
                   Container(
-                    height: 70,                    
+                    height: 70,
                     child: ListView.builder(
                       itemCount: categories.length,
                       shrinkWrap: true,
@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
                   ),
                   // Articles
                   Container(
-                    padding: EdgeInsets.only(top: 16),                    
+                    padding: EdgeInsets.only(top: 16),
                     child: ListView.builder(
                       itemCount: articles.length,
                       shrinkWrap: true,

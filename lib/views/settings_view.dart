@@ -2,7 +2,6 @@ import 'package:app_curso/views/favorites_view.dart';
 import 'package:app_curso/views/geral_view.dart';
 import 'package:app_curso/views/home.dart';
 import 'package:app_curso/views/uploads_list_view.dart';
-import 'package:app_curso/views/upload_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_curso/commons/constants.dart' as Constants;
@@ -82,7 +81,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   //   break;
                 }
               },
-              icon: Icon(Icons.more_vert, color: Colors.transparent,),
+              icon: Icon(
+                Icons.more_vert,
+                color: Colors.transparent,
+              ),
               itemBuilder: (context) => items
                   .map<PopupMenuItem>((element) => PopupMenuItem(
                         child: Text(element['name']),
